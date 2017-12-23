@@ -17,7 +17,7 @@
 	// You can find the free service at: http://www.MapsEasy.com     
 	///////////////////////////////////////////////////////////////////
 	function LoadGmaps() {
-		var myLatlng = new google.maps.LatLng(10.4708344,106.9748374);
+        var myLatlng = new google.maps.LatLng(11.4708344,106.9748374)
 		var myOptions = {
 			zoom: 16,
 			center: myLatlng,
@@ -34,12 +34,12 @@
 			},
 			streetViewControl: true,
 			mapTypeId: google.maps.MapTypeId.SATELLITE
-			}
+		}
 		var map = new google.maps.Map(document.getElementById("MyGmaps"), myOptions);
 		var marker = new google.maps.Marker({
 			position: myLatlng,
 			map: map,
-			title:"10.4733262,106.9708457"
+            title:"11.4708344,106.9748374"
 		});
 	}
 </script>
