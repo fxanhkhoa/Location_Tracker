@@ -58,6 +58,7 @@
                     <SolidColorBrush></SolidColorBrush>
                 </TextBox.Background>
             </TextBox>
+            <Button x:Name="refresh_button" FontSize="20" Content="Refresh Location" HorizontalAlignment="Left" Margin="19,281,0,0" VerticalAlignment="Top" Width="162" Height="38"/>
 
             <Grid.Background>
                 <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
