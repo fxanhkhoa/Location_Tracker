@@ -20,9 +20,22 @@ namespace Location_Tracker
     /// </summary>
     public partial class MainWindow : Window
     {
+        String sURL = AppDomain.CurrentDomain.BaseDirectory + "html/Google_Maps_Satellite.html";
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void DockPanel_Loaded(object sender, RoutedEventArgs e)
+        {
+            Uri uri = new Uri(sURL);
+            webBrowser1.Navigate(uri);
+            //MessageBox.Show(AppDomain.CurrentDomain.BaseDirectory);
+        }
+
+        private void setupObjectForScripting(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

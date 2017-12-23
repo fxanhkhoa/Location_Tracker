@@ -5,8 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Location_Tracker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="700" Width="1100">
+    <DockPanel Loaded="DockPanel_Loaded">
+        <Label VerticalAlignment="Top" Background="#21394f" DockPanel.Dock="Top">
+            <TextBox FontSize="30" Text="LOCATION_TRACKER" Background="#21394f" BorderThickness="0" Foreground="White" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+        </Label>
+        <Grid Name="Infomation" Width="386" HorizontalAlignment="Left">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+                <ColumnDefinition Width="261"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Name="TimeRemain" TextWrapping="WrapWithOverflow" BorderThickness="0" Text="   Thời Gian Đến Bến:" FontSize="20" Foreground="White" Margin="0,143,0,436" RenderTransformOrigin="0.66,0.517" Cursor="None" >
+                <TextBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0.339"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="0.652"/>
+                    </TransformGroup>
+                </TextBox.RenderTransform>
+                <TextBox.Background>
+                    <SolidColorBrush></SolidColorBrush>
+                </TextBox.Background>
+            </TextBox>
+
+            <TextBox Name="Text2" TextWrapping="WrapWithOverflow" BorderThickness="0" Text="   Thời Gian Đi:" FontSize="20" Foreground="White" Margin="0,183,0,398" RenderTransformOrigin="0.66,0.517" Cursor="None" >
+                <TextBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0.339" AngleX="-0.883"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="0.652" X="-0.02"/>
+                    </TransformGroup>
+                </TextBox.RenderTransform>
+                <TextBox.Background>
+                    <SolidColorBrush></SolidColorBrush>
+                </TextBox.Background>
+            </TextBox>
+
+            <TextBox Name="Text3" TextWrapping="WrapWithOverflow" BorderThickness="0" Text="   Vị Trí Hiện Tại:" FontSize="20" Foreground="White" Margin="1,221,19,358" RenderTransformOrigin="0.66,0.517" Cursor="None" Grid.ColumnSpan="2" >
+                <TextBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0.339"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="0.652"/>
+                    </TransformGroup>
+                </TextBox.RenderTransform>
+                <TextBox.Background>
+                    <SolidColorBrush></SolidColorBrush>
+                </TextBox.Background>
+            </TextBox>
+
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                    <GradientStop Color="#FF0D2462" Offset="0" />
+                    <GradientStop Color="#FF4A95BA" Offset="1" />
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+        <WebBrowser DockPanel.Dock="Right" Loaded="setupObjectForScripting" Name="webBrowser1" />
+    </DockPanel>
 </Window>

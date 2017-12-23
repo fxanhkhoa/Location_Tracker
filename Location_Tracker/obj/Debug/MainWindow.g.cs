@@ -73,7 +73,23 @@ namespace Location_Tracker {
         #line hidden
         
         
-        #line 69 "..\..\MainWindow.xaml"
+        #line 61 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.RadioButton Mode_Satellite;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 62 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.RadioButton Mode_Terran;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 71 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.WebBrowser webBrowser1;
         
@@ -131,9 +147,27 @@ namespace Location_Tracker {
             this.Text3 = ((System.Windows.Controls.TextBox)(target));
             return;
             case 6:
+            this.Mode_Satellite = ((System.Windows.Controls.RadioButton)(target));
+            
+            #line 61 "..\..\MainWindow.xaml"
+            this.Mode_Satellite.Checked += new System.Windows.RoutedEventHandler(this.Mode_Satellite_Checked);
+            
+            #line default
+            #line hidden
+            return;
+            case 7:
+            this.Mode_Terran = ((System.Windows.Controls.RadioButton)(target));
+            
+            #line 62 "..\..\MainWindow.xaml"
+            this.Mode_Terran.Checked += new System.Windows.RoutedEventHandler(this.Mode_Terran_Checked);
+            
+            #line default
+            #line hidden
+            return;
+            case 8:
             this.webBrowser1 = ((System.Windows.Controls.WebBrowser)(target));
             
-            #line 69 "..\..\MainWindow.xaml"
+            #line 71 "..\..\MainWindow.xaml"
             this.webBrowser1.Loaded += new System.Windows.RoutedEventHandler(this.setupObjectForScripting);
             
             #line default
