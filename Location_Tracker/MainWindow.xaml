@@ -59,6 +59,11 @@
                 </TextBox.Background>
             </TextBox>
             <Button x:Name="refresh_button" FontSize="20" Content="Refresh Location" HorizontalAlignment="Left" Margin="19,281,0,0" VerticalAlignment="Top" Width="162" Height="38" Click="refresh_button_Click"/>
+            <TextBox x:Name="Current_Location" BorderThickness="0" FontSize="20" Foreground="white"  Grid.Column="2" HorizontalAlignment="Left" Height="66" Margin="10,222,0,0" TextWrapping="WrapWithOverflow" Text="TextBox" VerticalAlignment="Top" Width="120">
+            <TextBox.Background>
+                <SolidColorBrush></SolidColorBrush>
+            </TextBox.Background>
+            </TextBox>
 
             <Grid.Background>
                 <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
