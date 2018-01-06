@@ -64,6 +64,8 @@
                 <SolidColorBrush></SolidColorBrush>
             </TextBox.Background>
             </TextBox>
+            <RadioButton x:Name="radio_btn_Terran" Content="Terran" Grid.Column="2" HorizontalAlignment="Left" Margin="71,10,0,0" VerticalAlignment="Top" Checked="radio_btn_Terran_Checked"/>
+            <RadioButton x:Name="radio_btn_satellite" Content="Satellite" Grid.Column="2" HorizontalAlignment="Left" Margin="71,30,0,0" VerticalAlignment="Top" Checked="radio_btn_satellite_Checked"/>
 
             <Grid.Background>
                 <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">

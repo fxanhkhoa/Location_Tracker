@@ -29,7 +29,8 @@ namespace Location_Tracker
         String sURL = AppDomain.CurrentDomain.BaseDirectory + "html/Google_Maps_Satellite.html";
         string filePath_satellite = AppDomain.CurrentDomain.BaseDirectory + "html/Google_Maps_Satellite.html";
         string filePath_terran = AppDomain.CurrentDomain.BaseDirectory + "html/Google_Maps_Terran.html";
-
+        Uri uri;
+        
         double Lat, Lon;
         public MainWindow()
         {
@@ -38,9 +39,11 @@ namespace Location_Tracker
 
         private void DockPanel_Loaded(object sender, RoutedEventArgs e)
         {
-            Uri uri = new Uri(sURL);
+            uri = new Uri(sURL);
             webBrowser1.Navigate(uri);
             //MessageBox.Show(AppDomain.CurrentDomain.BaseDirectory);
+
+            radio_btn_satellite.IsChecked = true;
 
             /******* Timer ******
             *
@@ -74,6 +77,20 @@ namespace Location_Tracker
             Lon = 106.9748374;
             GetMap(Lat, Lon);
             webBrowser1.Refresh();
+        }
+
+        private void radio_btn_Terran_Checked(object sender, RoutedEventArgs e)
+        {
+            sURL = filePath_terran;
+            uri = new Uri(sURL);
+            webBrowser1.Navigate(uri);
+        }
+
+        private void radio_btn_satellite_Checked(object sender, RoutedEventArgs e)
+        {
+            sURL = filePath_satellite;
+            uri = new Uri(sURL);
+            webBrowser1.Navigate(uri);
         }
 
         private void GetMap(double lat, double lon)
