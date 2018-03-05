@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Location_Tracker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1100">
+        Title="MainWindow" Height="700" Width="1100" Loaded="Window_Loaded">
     <DockPanel Loaded="DockPanel_Loaded">
         <Label VerticalAlignment="Top" Background="#21394f" DockPanel.Dock="Top">
             <TextBox FontSize="30" Text="LOCATION_TRACKER" Background="#21394f" BorderThickness="0" Foreground="White" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
@@ -16,8 +16,39 @@
                 <ColumnDefinition Width="20"></ColumnDefinition>
                 <ColumnDefinition Width="261"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
-            <TextBox Name="TimeRemain" TextWrapping="WrapWithOverflow" BorderThickness="0" Text="   Thời Gian Đến Bến:" FontSize="20" Foreground="White" Margin="0,143,0,436" RenderTransformOrigin="0.66,0.517" Cursor="None" >
+            <StackPanel>
+                <Label Background="#00000000" Name="label_com">Select Com:</Label>
+                <ComboBox Opacity="0.5" Name="combo_box_COM"/>
+                <Label>Baud</Label>
+                <ComboBox Opacity="0.5" Name="combo_box_BaudRate"></ComboBox>
+                <Label>Databits</Label>
+                <ComboBox Opacity="0.5" Name="combo_box_Databits"></ComboBox>
+                <Label>Parity</Label>
+                <ComboBox Opacity="0.5" Name="combo_box_Parity"></ComboBox>
+                <Label>Stopbit</Label>
+                <ComboBox Opacity="0.5" Name="combo_box_Stopbit"></ComboBox>
+                <Button Margin="0" Foreground="#FFFF4B4B" Name="btn_Serial_Connect" Click="btn_Serial_Connect_Click">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF4E4EF1" Offset="0"/>
+                            <GradientStop Color="#FF1A2ACB" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background> Connect
+                </Button>
+                <Button Margin="0" Foreground="#FFFF4B4B" Name="btn_Serial_Refresh" Click="btn_Serial_Refresh_Click" >
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF4E4EF1" Offset="0"/>
+                            <GradientStop Color="#FF1A2ACB" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background> Refresh
+                </Button>
+            </StackPanel>
+            <Grid>
+                <ProgressBar Minimum="0" Maximum="100" Height="20" Name="ProgressBar_Connection_Status"></ProgressBar>
+                <TextBlock Name="Text_ProgressBar" Text="{Binding ElementName=ProgressBar_Connection_Status, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            </Grid>
+            <TextBox Name="TimeRemain" TextWrapping="WrapWithOverflow" BorderThickness="0" Text="   Thời Gian Đến Bến:" FontSize="20" Foreground="White" Margin="0,360,0,219" RenderTransformOrigin="0.66,0.517" Cursor="None" >
                 <TextBox.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -31,7 +62,7 @@
                 </TextBox.Background>
             </TextBox>
 
-            <TextBox Name="Text2" TextWrapping="WrapWithOverflow" BorderThickness="0" Text="   Thời Gian Đi:" FontSize="20" Foreground="White" Margin="0,183,0,398" RenderTransformOrigin="0.66,0.517" Cursor="None" >
+            <TextBox Name="Text2" TextWrapping="WrapWithOverflow" BorderThickness="0" Text="   Vận Tốc:" FontSize="20" Foreground="White" Margin="0,400,0,181" RenderTransformOrigin="0.66,0.517" Cursor="None" >
                 <TextBox.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -45,7 +76,7 @@
                 </TextBox.Background>
             </TextBox>
 
-            <TextBox Name="Text3" TextWrapping="WrapWithOverflow" BorderThickness="0" Text="   Vị Trí Hiện Tại:" FontSize="20" Foreground="White" Margin="1,221,19,358" RenderTransformOrigin="0.66,0.517" Cursor="None" Grid.ColumnSpan="2" >
+            <TextBox Name="Text3" TextWrapping="WrapWithOverflow" BorderThickness="0" Text="   Vị Trí Hiện Tại:" FontSize="20" Foreground="White" Margin="1,438,19,141" RenderTransformOrigin="0.66,0.517" Cursor="None" Grid.ColumnSpan="2" >
                 <TextBox.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -58,11 +89,34 @@
                     <SolidColorBrush></SolidColorBrush>
                 </TextBox.Background>
             </TextBox>
-            <Button x:Name="refresh_button" FontSize="20" Content="Refresh Location" HorizontalAlignment="Left" Margin="19,281,0,0" VerticalAlignment="Top" Width="162" Height="38" Click="refresh_button_Click"/>
-            <TextBox x:Name="Current_Location" BorderThickness="0" FontSize="20" Foreground="white"  Grid.Column="2" HorizontalAlignment="Left" Height="66" Margin="10,222,0,0" TextWrapping="WrapWithOverflow" Text="TextBox" VerticalAlignment="Top" Width="120">
-            <TextBox.Background>
-                <SolidColorBrush></SolidColorBrush>
-            </TextBox.Background>
+            <TextBox Name="Text4" TextWrapping="WrapWithOverflow" BorderThickness="0" Text="   Khoảng Cách Còn:" FontSize="20" Foreground="White" Margin="0,502,0,77" RenderTransformOrigin="0.67,-0.017" Cursor="None" >
+                <TextBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0.339"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="0.664"/>
+                    </TransformGroup>
+                </TextBox.RenderTransform>
+                <TextBox.Background>
+                    <SolidColorBrush></SolidColorBrush>
+                </TextBox.Background>
+            </TextBox>
+            <Button x:Name="refresh_button" FontSize="20" Content="Refresh Location" HorizontalAlignment="Left" Margin="28,557,0,0" VerticalAlignment="Top" Width="162" Height="38" Click="refresh_button_Click"/>
+            <TextBox x:Name="Current_Location" BorderThickness="0" FontSize="20" Foreground="white"  Grid.Column="2" HorizontalAlignment="Left" Height="66" Margin="12,441,0,0" TextWrapping="WrapWithOverflow" Text="TextBox" VerticalAlignment="Top" Width="120">
+                <TextBox.Background>
+                    <SolidColorBrush></SolidColorBrush>
+                </TextBox.Background>
+            </TextBox>
+            <TextBox x:Name="Current_Speed" BorderThickness="0" FontSize="20" Foreground="white"  Grid.Column="2" HorizontalAlignment="Left" Height="66" Margin="12,399,0,0" TextWrapping="WrapWithOverflow" Text="TextBox" VerticalAlignment="Top" Width="120">
+                <TextBox.Background>
+                    <SolidColorBrush></SolidColorBrush>
+                </TextBox.Background>
+            </TextBox>
+            <TextBox x:Name="Remain_Distance" BorderThickness="0" FontSize="20" Foreground="white"  Grid.Column="2" HorizontalAlignment="Left" Height="66" Margin="12,507,0,0" TextWrapping="WrapWithOverflow" Text="TextBox" VerticalAlignment="Top" Width="120">
+                <TextBox.Background>
+                    <SolidColorBrush></SolidColorBrush>
+                </TextBox.Background>
             </TextBox>
             <RadioButton x:Name="radio_btn_Terran" Content="Terran" Grid.Column="2" HorizontalAlignment="Left" Margin="71,10,0,0" VerticalAlignment="Top" Checked="radio_btn_Terran_Checked"/>
             <RadioButton x:Name="radio_btn_satellite" Content="Satellite" Grid.Column="2" HorizontalAlignment="Left" Margin="71,30,0,0" VerticalAlignment="Top" Checked="radio_btn_satellite_Checked"/>

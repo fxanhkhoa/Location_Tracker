@@ -31,10 +31,11 @@ namespace Location_Tracker
         string filePath_terran = AppDomain.CurrentDomain.BaseDirectory + "html/Google_Maps_Terran.html";
         Uri uri;
         
-        double Lat, Lon;
+        double Lat, Lon,speed;
         public MainWindow()
         {
             InitializeComponent();
+            Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
         }
 
         private void DockPanel_Loaded(object sender, RoutedEventArgs e)
@@ -50,14 +51,26 @@ namespace Location_Tracker
                 *
             ********************/
             DispatcherTimer dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             dispatcherTimer.Start();
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            Current_Location.Text = Lat.ToString() + "\n" + Lon.ToString();
+            try
+            {
+                Current_Location.Text = GlobalVar.Lat.ToString() + "\n" + GlobalVar.Lon.ToString();
+                GetMap(GlobalVar.Lat, GlobalVar.Lon);
+                speed = GlobalVar.Speed_Time_Calculate.getSpeed();
+                Current_Speed.Text = speed.ToString();
+                Remain_Distance.Text = GlobalVar.Distance.ToString();
+                webBrowser1.Refresh();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private void setupObjectForScripting(object sender, RoutedEventArgs e)
@@ -73,9 +86,9 @@ namespace Location_Tracker
             //file.Insert(19, s);
             //File.WriteAllLines(sURL, file.ToArray());
 
-            Lat = 11.4708344;
-            Lon = 106.9748374;
-            GetMap(Lat, Lon);
+            //Lat = 11.4708344;
+            //Lon = 106.9748374;
+            //GetMap(Lat, Lon);
             webBrowser1.Refresh();
         }
 
@@ -91,6 +104,78 @@ namespace Location_Tracker
             sURL = filePath_satellite;
             uri = new Uri(sURL);
             webBrowser1.Navigate(uri);
+        }
+
+        private void btn_Serial_Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            Serial_Add_Element();
+        }
+
+        private void btn_Serial_Connect_Click(object sender, RoutedEventArgs e)
+        {
+            string comName, Baud, Databits, Parity, Stopbit;
+            Boolean OK;
+
+            try
+            {
+                comName = combo_box_COM.SelectedItem.ToString();
+                Baud = combo_box_BaudRate.SelectedItem.ToString();
+                Databits = combo_box_Databits.SelectedItem.ToString();
+                Parity = combo_box_Parity.SelectedItem.ToString();
+                Stopbit = combo_box_Stopbit.SelectedItem.ToString();
+
+                OK = GlobalVar.Serial_Data.connect(comName, Baud, Databits, Parity, Stopbit);
+                if (OK)
+                {
+                    ProgressBar_Connection_Status.Value = 100;
+
+                }
+                else
+                {
+                    ProgressBar_Connection_Status.Value = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void Serial_Add_Element()
+        {
+            List<string> temp = new List<string>();
+
+            // Get All PortName
+            temp = GlobalVar.Serial_Data.Get_PORT();
+            combo_box_COM.ItemsSource = temp;
+            //combo_box_COM.SelectedIndex = 0;
+
+            //Get BaudRate
+            temp = GlobalVar.Serial_Data.Get_Baud();
+            combo_box_BaudRate.ItemsSource = temp;
+            combo_box_BaudRate.SelectedIndex = 2;
+
+            //Get Databits
+            temp = GlobalVar.Serial_Data.Get_Databits();
+            combo_box_Databits.ItemsSource = temp;
+            combo_box_Databits.SelectedIndex = 1;
+
+            //Get Parity
+            temp = GlobalVar.Serial_Data.Get_Parity();
+            combo_box_Parity.ItemsSource = temp;
+            combo_box_Parity.SelectedIndex = 0;
+
+            //Get Stopbit
+            temp = GlobalVar.Serial_Data.Get_Stopbit();
+            combo_box_Stopbit.ItemsSource = temp;
+            combo_box_Stopbit.SelectedIndex = 1;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            GlobalVar.Serial_Data = new Serial_Data();
+            GlobalVar.Speed_Time_Calculate = new Speed_Time_Calculate();
+            Serial_Add_Element();
         }
 
         private void GetMap(double lat, double lon)
