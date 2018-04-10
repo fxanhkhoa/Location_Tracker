@@ -103,17 +103,22 @@
                 </TextBox.Background>
             </TextBox>
             <Button x:Name="refresh_button" FontSize="20" Content="Refresh Location" HorizontalAlignment="Left" Margin="28,557,0,0" VerticalAlignment="Top" Width="162" Height="38" Click="refresh_button_Click"/>
-            <TextBox x:Name="Current_Location" BorderThickness="0" FontSize="20" Foreground="white"  Grid.Column="2" HorizontalAlignment="Left" Height="66" Margin="12,441,0,0" TextWrapping="WrapWithOverflow" Text="TextBox" VerticalAlignment="Top" Width="120">
+            <TextBox x:Name="Current_Location" BorderThickness="0" FontSize="20" Foreground="white"  Grid.Column="2" HorizontalAlignment="Left" Height="66" Margin="12,441,0,0" TextWrapping="WrapWithOverflow" Text="TextBox" VerticalAlignment="Top" Width="144">
                 <TextBox.Background>
                     <SolidColorBrush></SolidColorBrush>
                 </TextBox.Background>
             </TextBox>
-            <TextBox x:Name="Current_Speed" BorderThickness="0" FontSize="20" Foreground="white"  Grid.Column="2" HorizontalAlignment="Left" Height="66" Margin="12,399,0,0" TextWrapping="WrapWithOverflow" Text="TextBox" VerticalAlignment="Top" Width="120">
+            <TextBox x:Name="Current_Speed" BorderThickness="0" FontSize="20" Foreground="white"  Grid.Column="2" HorizontalAlignment="Left" Height="66" Margin="12,399,0,0" TextWrapping="WrapWithOverflow" Text="TextBox" VerticalAlignment="Top" Width="144">
                 <TextBox.Background>
                     <SolidColorBrush></SolidColorBrush>
                 </TextBox.Background>
             </TextBox>
             <TextBox x:Name="Remain_Distance" BorderThickness="0" FontSize="20" Foreground="white"  Grid.Column="2" HorizontalAlignment="Left" Height="66" Margin="12,507,0,0" TextWrapping="WrapWithOverflow" Text="TextBox" VerticalAlignment="Top" Width="120">
+                <TextBox.Background>
+                    <SolidColorBrush></SolidColorBrush>
+                </TextBox.Background>
+            </TextBox>
+            <TextBox x:Name="data" BorderThickness="0" FontSize="20" Foreground="white"  Grid.Column="2" HorizontalAlignment="Left" Height="66" Margin="12,543,0,0" TextWrapping="WrapWithOverflow" Text="TextBox" VerticalAlignment="Top" Width="144">
                 <TextBox.Background>
                     <SolidColorBrush></SolidColorBrush>
                 </TextBox.Background>

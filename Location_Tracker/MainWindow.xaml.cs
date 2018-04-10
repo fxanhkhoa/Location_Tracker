@@ -26,9 +26,10 @@ namespace Location_Tracker
         *
         *                                                                               
         ************************************************************************************/
-        String sURL = AppDomain.CurrentDomain.BaseDirectory + "html/Google_Maps_Satellite.html";
+        String sURL = AppDomain.CurrentDomain.BaseDirectory + "html/Google_Maps_Terran.html";
         string filePath_satellite = AppDomain.CurrentDomain.BaseDirectory + "html/Google_Maps_Satellite.html";
         string filePath_terran = AppDomain.CurrentDomain.BaseDirectory + "html/Google_Maps_Terran.html";
+        String AllPoint = AppDomain.CurrentDomain.BaseDirectory + "html/Dao_DatLien.txt";
         Uri uri;
         
         double Lat, Lon,speed;
@@ -45,6 +46,7 @@ namespace Location_Tracker
             //MessageBox.Show(AppDomain.CurrentDomain.BaseDirectory);
 
             radio_btn_satellite.IsChecked = true;
+            //radio_btn_Terran.IsChecked = true;
 
             /******* Timer ******
             *
@@ -52,8 +54,8 @@ namespace Location_Tracker
             ********************/
             DispatcherTimer dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += dispatcherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
-            dispatcherTimer.Start();
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 3);
+            //dispatcherTimer.Start();
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
@@ -89,6 +91,7 @@ namespace Location_Tracker
             //Lat = 11.4708344;
             //Lon = 106.9748374;
             //GetMap(Lat, Lon);
+            DrawAllPoint();
             webBrowser1.Refresh();
         }
 
@@ -189,6 +192,37 @@ namespace Location_Tracker
             file.RemoveAt(19); // Function Get map from Lat and Lon
             file.Insert(19, command);
             File.WriteAllLines(sURL, file.ToArray());
+        }
+
+        private void DrawAllPoint()
+        {
+            //MessageBox.Show(AllPoint);
+            var file = new List<string>(File.ReadAllLines(AllPoint));
+            for (int i = 0; i < file.Count; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    string text_temp = file[i];
+                    //MessageBox.Show(text_temp);
+                    string position_text = text_temp.Substring(18, 9) + "," + text_temp.Substring(28, 11);
+                    string command = "        myLatlng = new google.maps.LatLng(" + position_text + ");";
+                    string line1 = "    marker = new google.maps.Marker({";
+                    string line2 = "    position: myLatlng,";
+                    string line3 = "    map: map,";
+			        string line4 = "    title:\"" + position_text +  "\"";
+                    string line5 = "    });";
+
+                    //MessageBox.Show(command);
+                    var map = new List<string>(File.ReadAllLines(sURL));
+                    map.Insert(42, command);
+                    map.Insert(43, line1);
+                    map.Insert(44, line2);
+                    map.Insert(45, line3);
+                    map.Insert(46, line4);
+                    map.Insert(47, line5);
+                    File.WriteAllLines(sURL, map);
+                }
+            }
         }
     }
 }
